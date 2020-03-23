@@ -1,0 +1,61 @@
+#title {
+  text-align: center;
+}
+#everything {
+  justify-content: center;
+  align
+}
+#tooltip {
+  opacity: 0;
+  width: 200px;
+  height: 100px;
+  position: fixed;
+  z-index: 2;
+  bottom: 250px;
+  left: 1200px;
+}
+svg {
+  margin: 20px;
+  padding: 30px;
+
+}
+#x-axis {
+  z-index: 6;
+}
+
+#legend {
+  position: relative;
+  z-index: 4;
+  bottom: 220px;
+  left: 300px;
+  width: 300px;
+}
+
+#text1 {
+  position: relative;
+  z-index: 5;
+  bottom: 30px;
+  right: 450px;
+  width: 300px;
+}
+#text2 {
+  position: relative;
+  z-index: 5;
+  bottom: 65px;
+  right: 390px;
+  width: 300px;
+}
+#text3 {
+  position: relative;
+  z-index: 5;
+  bottom: 99px;
+  right: 332px;
+  width: 300px;
+}
+#text4 {
+  position: relative;
+  z-index: 5;
+  bottom: 132px;
+  right: 272px;
+  width: 300px;
+}
