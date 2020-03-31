@@ -14,6 +14,27 @@ let lonks = [
 Promise.all(lonks.map(url => d3.json(url))).then(function(data) {
   let colors = ["red", "#b3ecff", "#ffccff", "green"];
 
+console.log(data)
+
+let countyFromTopo = [];
+for (var j = 0; j < data[1].objects.counties.geometries.length; j++) {
+countyFromTopo.push(data[1].objects.counties.geometries[j].id)
+}
+
+console.log(countyFromTopo)
+
+let sortedData = [];
+for (var v = 0; v < countyFromTopo.length; v++) {
+  for (var u = 0; u < data[0].length; u++) {
+      if (data[0][u].fips == countyFromTopo[v]){
+        sortedData.push(data[0][u])
+      }
+
+  }
+}
+
+console.log(sortedData)
+
   d3.select("svg")
     .append("g")
     .attr("class", "counties")
@@ -24,38 +45,38 @@ Promise.all(lonks.map(url => d3.json(url))).then(function(data) {
     .attr("d", path)
     .attr("class", "county")
     .attr("data-fips", function(d, i) {
-      return data[0][i].fips;
+      return sortedData[i].fips;
     })
     .attr("data-education", function(d, i) {
-      return data[0][i].bachelorsOrHigher;
+      return sortedData[i].bachelorsOrHigher;
     })
     .style("fill", function(d, i) {
-      if (data[0][i].bachelorsOrHigher <= 10) {
+      if (sortedData[i].bachelorsOrHigher <= 10) {
         return "red";
       } else if (
-        data[0][i].bachelorsOrHigher > 10 &&
-        data[0][i].bachelorsOrHigher <= 20
+        sortedData[i].bachelorsOrHigher > 10 &&
+        sortedData[i].bachelorsOrHigher <= 20
       ) {
         return "#b3ecff";
       } else if (
-        data[0][i].bachelorsOrHigher > 20 &&
-        data[0][i].bachelorsOrHigher <= 30
+        sortedData[i].bachelorsOrHigher > 20 &&
+        sortedData[i].bachelorsOrHigher <= 30
       ) {
         return "#ffccff";
-      } else if (data[0][i].bachelorsOrHigher > 30) {
+      } else if (sortedData[i].bachelorsOrHigher > 30) {
         return "green";
       }
     })
     .on("mouseover", function(d, i) {
       d3.select("#tooltip")
         .style("opacity", 0.8)
-        .attr("data-education", data[0][i].bachelorsOrHigher)
+        .attr("data-education", sortedData[i].bachelorsOrHigher)
         .html(
           "County: " +
-            data[0][i].area_name +
+            sortedData[i].area_name +
             "<br>" +
             "Rate: " +
-            data[0][i].bachelorsOrHigher
+            sortedData[i].bachelorsOrHigher
         );
     })
     .on("mouseout", function(d, i) {
