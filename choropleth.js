@@ -14,14 +14,10 @@ let lonks = [
 Promise.all(lonks.map(url => d3.json(url))).then(function(data) {
   let colors = ["red", "#b3ecff", "#ffccff", "green"];
 
-console.log(data)
-
 let countyFromTopo = [];
 for (var j = 0; j < data[1].objects.counties.geometries.length; j++) {
 countyFromTopo.push(data[1].objects.counties.geometries[j].id)
 }
-
-console.log(countyFromTopo)
 
 let sortedData = [];
 for (var v = 0; v < countyFromTopo.length; v++) {
@@ -32,8 +28,6 @@ for (var v = 0; v < countyFromTopo.length; v++) {
 
   }
 }
-
-console.log(sortedData)
 
   d3.select("svg")
     .append("g")
